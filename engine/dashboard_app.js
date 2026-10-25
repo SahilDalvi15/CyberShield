@@ -4,7 +4,9 @@ const DATA = __DATA_JSON__;
    CyberShield LIVE BACKEND INTEGRATION — hoisted to top to avoid TDZ errors
    Connects to FastAPI Core (http://localhost:8000/api) with resilient fallback
    ========================================================================== */
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = (typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"))
+  ? "http://localhost:8000/api"
+  : "https://cybershield-3ekb.onrender.com/api";
 
 // Fallback Evidence Vault items if running purely offline
 const FALLBACK_EVIDENCE = [

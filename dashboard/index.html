@@ -1060,7 +1060,7 @@
       </div>
       <!-- Hindi/Marathi: Official सूत्र Logo with Tricolor Ribbon -->
       <div class="hero-logo-hi" id="hero-logo-hi">
-        <img src="cybershield-logo.png" alt="CyberShield" class="hero-logo-img">
+        <img src="cybershield-logo.png" alt="सूत्र" class="hero-logo-img">
       </div>
     </div>
     <h1 data-i18n="hero_title">The Connection Thread</h1>
@@ -1830,7 +1830,9 @@ const DATA = {"nodes": [{"id": "P01", "label": "Rajeev Malhotra", "type": "perso
    CyberShield LIVE BACKEND INTEGRATION — hoisted to top to avoid TDZ errors
    Connects to FastAPI Core (http://localhost:8000/api) with resilient fallback
    ========================================================================== */
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = (typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"))
+  ? "http://localhost:8000/api"
+  : "https://cybershield-3ekb.onrender.com/api";
 
 // Fallback Evidence Vault items if running purely offline
 const FALLBACK_EVIDENCE = [
