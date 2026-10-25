@@ -35,6 +35,16 @@ app = FastAPI(
 @app.on_event("startup")
 def on_startup():
     init_db()
+    try:
+        from database import SessionLocal, Case
+        from seed import seed_database
+        db = SessionLocal()
+        if not db.query(Case).first():
+            print("Database empty, running initial seed...")
+            seed_database()
+        db.close()
+    except Exception as e:
+        print("Startup seed notice:", e)
 
 app.add_middleware(
     CORSMiddleware,
